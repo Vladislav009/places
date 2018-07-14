@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\PlaceRequest;
 use App\Place;
 
-class Places extends Controller
+class PlaceController extends Controller
 {
     public function index()
     {
@@ -28,11 +28,16 @@ class Places extends Controller
 
     public function show(Request $request, $id)
     {
+        $url=[];
         $place = Place::find($id);
-		$dir = 'public/'.$id;
-		$file = Storage::files($dir);
-		$fil = str_replace('public/','',$file);
-        return view('place', compact('place','fil'));
+        $dir = 'public/'.$id;
+        $file = Storage::files($dir);
+        $fil = str_replace('public/', '', $file);
+        foreach ($fil as $fi) {
+            $images = Storage::disk('public')->url($fi);
+            $url[]=$images;
+        }
+        return view('place', compact('place', 'url'));
     }
 
     public function showForm($id)
@@ -42,12 +47,9 @@ class Places extends Controller
 
     public function store(Request $request, $id)
     {
-		$place = Place::find($id);
+        $place = Place::find($id);
         $path = $request->image->getClientOriginalName();
         $file = $request->image->storeAs($id, $path, 'public');
-
-		return redirect('places/'.$id);
-
+        return redirect('places/'.$id);
     }
-
 }
