@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\PlaceRequest;
 use App\Place;
+use App\Type;
+use App\Photo;
 
 class PlaceController extends Controller
 {
@@ -17,7 +19,8 @@ class PlaceController extends Controller
 
     public function form()
     {
-        return view('form');
+		$types = Type::all();
+        return view('form', compact('types'));
     }
 
     public function create(PlaceRequest $request)
@@ -28,16 +31,9 @@ class PlaceController extends Controller
 
     public function show(Request $request, $id)
     {
-        $url=[];
         $place = Place::find($id);
-        $dir = 'public/'.$id;
-        $file = Storage::files($dir);
-        $fil = str_replace('public/', '', $file);
-        foreach ($fil as $fi) {
-            $images = Storage::disk('public')->url($fi);
-            $url[]=$images;
-        }
-        return view('place', compact('place', 'url'));
+		$photos = Photo::all()->where('id_place', $id);
+        return view('place', compact('place','photos'));
     }
 
     public function showForm($id)
@@ -47,9 +43,14 @@ class PlaceController extends Controller
 
     public function store(Request $request, $id)
     {
-        $place = Place::find($id);
         $path = $request->image->getClientOriginalName();
-        $file = $request->image->storeAs($id, $path, 'public');
+        $request->image->storeAs($id, $path, 'public');
+		$url = Storage::url($id.'/'.$path);
+		Photo::insert(array(
+			'url' => $url,
+			'id_place' => $id
+		));
         return redirect('places/'.$id);
     }
+
 }
