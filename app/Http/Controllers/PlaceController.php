@@ -19,7 +19,7 @@ class PlaceController extends Controller
 
     public function form()
     {
-		$types = Type::all();
+        $types = Type::all();
         return view('form', compact('types'));
     }
 
@@ -29,11 +29,11 @@ class PlaceController extends Controller
         return redirect('places');
     }
 
-    public function show(Request $request, $id)
+    public function show($id)
     {
         $place = Place::find($id);
-		$photos = Photo::all()->where('id_place', $id);
-        return view('place', compact('place','photos'));
+        $photos = Photo::all()->where('id_place', $id);
+        return view('place', compact('place', 'photos'));
     }
 
     public function showForm($id)
@@ -44,13 +44,12 @@ class PlaceController extends Controller
     public function store(Request $request, $id)
     {
         $path = $request->image->getClientOriginalName();
-        $request->image->storeAs($id, $path, 'public');
-		$url = Storage::url($id.'/'.$path);
-		Photo::insert(array(
-			'url' => $url,
-			'id_place' => $id
-		));
+        $value = $request->image->storeAs($id, $path, 'public');
+        $url = Storage::url($value);
+        Photo::insert(array(
+            'url' => $url,
+            'id_place' => $id
+        ));
         return redirect('places/'.$id);
     }
-
 }
