@@ -2,11 +2,13 @@
 
 @section('content')
 
-<form action="" method="post" enctype="multipart/form-data">
-	@csrf
-	<input type="file" name="image">
-	<button type="submit">Добавить</button>
+<form action="{{route('storePhoto', $id)}}" method="post" enctype="multipart/form-data">
+	<div class="form-group">
+	    @csrf
+	    <input type="file" class="form-control-file" name="image">
+    </div>
+	<button type="submit" class="btn btn-primary">Добавить</button>
 </form>
-<a href="/places/{{$id}}">Назад</a>
+<a href="{{route('show', $id)}}">Назад</a>
 
 @endsection

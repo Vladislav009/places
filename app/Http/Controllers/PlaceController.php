@@ -41,6 +41,28 @@ class PlaceController extends Controller
         return view('formPhoto', compact('id'));
     }
 
+	public function storeSelect(Request $request)
+    {
+		$path = $request->image->getClientOriginalName();
+        $id = $request->type;
+        $value = $request->image->storeAs($id, $path, 'public');
+        $url = Storage::url($value);
+        Photo::insert(array(
+            'url' => $url,
+            'id_place' => $id
+        ));
+        return redirect('places/'.$id);
+    }
+
+	public function addFormSelect(Request $request)
+    {
+		$places = Place::all();
+        return view('formPhotoSelect', compact('places'));
+    }
+
+
+
+
     public function store(Request $request, $id)
     {
         $path = $request->image->getClientOriginalName();

@@ -12,12 +12,15 @@
 */
 
 Route::get('/', function () {
-    return redirect('places');
+    return view('welcome');
 });
-
-Route::get('/places', 'PlaceController@index');
-Route::get('places/create', 'PlaceController@form')->name('form');
-Route::post('places/create', 'PlaceController@create')->name('create');
-Route::get('places/{id}', 'PlaceController@show')->name('show');
-Route::get('places/{id}/photos/add', 'PlaceController@showForm')->name('showForm');
-Route::post('places/{id}/photos/add', 'PlaceController@store');
+Route::get('/places', 'PlaceController@index')->name('index');
+Route::prefix('places')->group(function(){
+	Route::get('create', 'PlaceController@form')->name('formPlace');
+	Route::post('create', 'PlaceController@create')->name('create');
+	Route::get('photos/add', 'PlaceController@addFormSelect')->name('formPhotoSelect')->middleware('check');
+	Route::post('photos/add', 'PlaceController@storeSelect')->name('storePhotoSelect');
+	Route::get('{id}', 'PlaceController@show')->name('show');
+	Route::get('{id}/photos/add', 'PlaceController@showForm')->name('formPhoto');
+	Route::post('{id}/photos/add', 'PlaceController@store')->name('storePhoto');
+});

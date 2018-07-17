@@ -3,14 +3,20 @@
 @section('content')
 
 <form  action="{{ route('create') }}" method="post">
-	{{ csrf_field() }}
-	Введите название места:<input type="text" name="name">
-	<select name="type">
-		@foreach($types as $type)
-            <option value="{{$type->type}}">{{$type->type}}</option>
-		@endforeach
-    </select>
-	<input type="submit" name="" value="Добавить">
+	<div class="form-group">
+		{{ csrf_field() }}
+		<label for="text_place">Введите название места:</label>
+		<input id="text_place" type="text" name="name" class="form-control">
+	</div>
+	<div class="form-group">
+	    <select name="type" class="form-control">
+	    	@foreach($types as $type)
+                <option value="{{$type->type}}">{{$type->type}}</option>
+	    	@endforeach
+        </select>
+    </div>
+	 <button type="submit" class="btn btn-primary mb-2">Добаить</button>
+
 </form>
 @if (count($errors) > 0)
   <div class="alert alert-danger">
@@ -21,5 +27,4 @@
     </ul>
   </div>
 @endif
-<a href="/places">На главную</a>
 @endsection
