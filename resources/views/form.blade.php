@@ -2,7 +2,7 @@
 
 @section('content')
 
-<form  action="{{ route('create') }}" method="post">
+<form  action="{{ route('place.create') }}" method="post">
 	<div class="form-group">
 		{{ csrf_field() }}
 		<label for="text_place">Введите название места:</label>

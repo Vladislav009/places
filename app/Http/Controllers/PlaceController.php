@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Route;
 use App\Http\Requests\PlaceRequest;
+use App\Http\Requests\PhotoRequest;
 use App\Place;
 use App\Type;
 use App\Photo;
@@ -41,7 +43,7 @@ class PlaceController extends Controller
         return view('formPhoto', compact('id'));
     }
 
-	public function storeSelect(Request $request)
+	public function storeSelect(PhotoRequest $request)
     {
 		$path = $request->image->getClientOriginalName();
         $id = $request->type;
@@ -63,7 +65,7 @@ class PlaceController extends Controller
 
 
 
-    public function store(Request $request, $id)
+    public function store(PhotoRequest $request, $id)
     {
         $path = $request->image->getClientOriginalName();
         $value = $request->image->storeAs($id, $path, 'public');

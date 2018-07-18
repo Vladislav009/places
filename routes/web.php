@@ -14,13 +14,21 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/places', 'PlaceController@index')->name('index');
 Route::prefix('places')->group(function(){
-	Route::get('create', 'PlaceController@form')->name('formPlace');
-	Route::post('create', 'PlaceController@create')->name('create');
-	Route::get('photos/add', 'PlaceController@addFormSelect')->name('formPhotoSelect')->middleware('check');
-	Route::post('photos/add', 'PlaceController@storeSelect')->name('storePhotoSelect');
-	Route::get('{id}', 'PlaceController@show')->name('show');
-	Route::get('{id}/photos/add', 'PlaceController@showForm')->name('formPhoto');
-	Route::post('{id}/photos/add', 'PlaceController@store')->name('storePhoto');
+
+	Route::get('/', 'PlaceController@index')->name('index');
+
+	Route::name('place.')->group(function(){
+		Route::get('create', 'PlaceController@form')->name('form');
+		Route::post('create', 'PlaceController@create')->name('create');
+		Route::get('{id}', 'PlaceController@show')->name('show');
+	});
+
+	Route::name('photo.')->group(function(){
+		Route::get('photos/add', 'PlaceController@addFormSelect')->name('form.select')->middleware('check');
+		Route::post('photos/add', 'PlaceController@storeSelect')->name('store.select');
+		Route::get('{id}/photos/add', 'PlaceController@showForm')->name('form');
+		Route::post('{id}/photos/add', 'PlaceController@store')->name('store');
+	});
+
 });

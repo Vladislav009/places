@@ -37,20 +37,25 @@
 			  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto">
 				  <li class="nav-item">
-					<a class="nav-link" href="{{route('formPlace')}}">Добавить место</a>
+					<a class="nav-link {{ Route::currentRouteName('') == 'place.form'  ? "active" : null }}" href="{{route('place.form')}}">Добавить место</a>
 				  </li>
-				  @if (Route::currentRouteName() == 'show')
+				  @if (Route::currentRouteName() == 'place.show')
 				  <li class="nav-item">
-					<a class="nav-link" href="{{route('formPhoto',  $place->id) }}">Добавить фотографию</a>
+					<a class="nav-link  {{ Route::currentRouteName('') == 'photo.form'  ? "active" : null }}" href="{{route('photo.form',  $place->id) }}">Добавить фотографию</a>
 				  </li>
 				  @else
 				  <li class="nav-item">
-					<a class="nav-link" href="{{route('formPhotoSelect') }}">Добавить фотографию</a>
+					<a class="nav-link  {{ Route::currentRouteName('') == 'photo.form.select'  ? "active" : null }}" href="{{route('photo.form.select') }}">Добавить фотографию</a>
 				  </li>
 				  @endif
 				  <li class="nav-item">
-					<a class="nav-link" href="{{route ('index')}}">Все места</a>
+					<a class="nav-link  {{ Route::currentRouteName('') == 'index'  ? "active" : null }}" href="{{route ('index')}}">Все места</a>
 				  </li>
+				  @if (Route::currentRouteName() == 'place.show')
+				  <li class="nav-item">
+					<a class="nav-link  {{ Route::currentRouteName('') == 'place.show'  ? "active" : null }}" href="">{{$place->name}}</a>
+				  </li>
+				  @endif
 				</ul>
 			  </div>
 			</nav>

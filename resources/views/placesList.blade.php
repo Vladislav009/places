@@ -8,7 +8,7 @@
     	@if( isset($places))
     	@foreach($places as $place)
     	<tr>
-    		<td><a href="{{route ('show',$place->id)}}">{{$place->name}}</a></td>
+    		<td><a href="{{route ('place.show',$place->id)}}">{{$place->name}}</a></td>
     		<td>{{$place->type}}</td>
     	</tr>
     	@endforeach
