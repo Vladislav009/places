@@ -25,8 +25,10 @@ Route::prefix('places')->group(function(){
 	});
 
 	Route::name('photo.')->group(function(){
-		Route::get('photos/add', 'PlaceController@addFormSelect')->name('form.select')->middleware('check');
-		Route::post('photos/add', 'PlaceController@storeSelect')->name('store.select');
+		Route::prefix('photos')->group(function(){
+			Route::get('add', 'PlaceController@addFormSelect')->name('form.select')->middleware('check');
+			Route::post('add', 'PlaceController@storeSelect')->name('store.select');
+		});
 		Route::get('{id}/photos/add', 'PlaceController@showForm')->name('form');
 		Route::post('{id}/photos/add', 'PlaceController@store')->name('store');
 	});
