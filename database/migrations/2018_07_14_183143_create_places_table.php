@@ -16,7 +16,8 @@ class CreatePlacesTable extends Migration
         Schema::create('places', function (Blueprint $table) {
             $table->increments('id');
 			$table->string('name');
-			$table->string('type');
+			$table->integer('type_id');
+			$table->integer('photo_id')->default('0');
             $table->timestamps();
         });
     }

@@ -9,7 +9,7 @@
     	@foreach($places as $place)
     	<tr>
     		<td><a href="{{route ('place.show',$place->id)}}">{{$place->name}}</a></td>
-    		<td>{{$place->type}}</td>
+    		<td>{{$place->type->type}}</td>
     	</tr>
     	@endforeach
     	@endif

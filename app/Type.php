@@ -9,4 +9,9 @@ class Type extends Model
 	protected $fillable = [
         'type'
     ];
+
+	public function places()
+    {
+    	return $this->hasMany('App\Place');
+    }
 }

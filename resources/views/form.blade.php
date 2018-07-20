@@ -9,9 +9,9 @@
 		<input id="text_place" type="text" name="name" class="form-control">
 	</div>
 	<div class="form-group">
-	    <select name="type" class="form-control">
+	    <select name="type_id" class="form-control">
 	    	@foreach($types as $type)
-                <option value="{{$type->type}}">{{$type->type}}</option>
+                <option value="{{$type->id}}">{{$type->type}}</option>
 	    	@endforeach
         </select>
     </div>

@@ -16,7 +16,6 @@ class Photos extends Migration
 		Schema::create('photos', function (Blueprint $table) {
             $table->increments('id');
 			$table->string('url');
-			$table->integer('id_place');
         });
     }
 

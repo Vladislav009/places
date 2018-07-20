@@ -8,6 +8,9 @@
 	  <li class="nav-item">
 		<a class="nav-link @if( Route::currentRouteName() == 'place.form') active @endif " href="{{route('place.form')}}">Добавить место</a>
 	  </li>
+	  <li class="nav-item">
+	   <a class="nav-link  @if (Route::currentRouteName() == 'index') active @endif" href="{{route ('index')}}">Все места</a>
+	 </li>
 	  @if (Route::currentRouteName() == 'place.show')
 	  <li class="nav-item">
 		<a class="nav-link  @if(Route::currentRouteName() == 'photo.form') active @endif" href="{{route('photo.form',  $place->id) }}">Добавить фотографию</a>
@@ -20,9 +23,6 @@
 		<a class="nav-link   @if (Route::currentRouteName() == 'photo.form.select') active @endif" href="{{route('photo.form.select') }}">Добавить фотографию</a>
 	  </li>
 	  @endif
-	  <li class="nav-item">
-		<a class="nav-link  @if (Route::currentRouteName() == 'index') active @endif" href="{{route ('index')}}">Все места</a>
-	  </li>
 	</ul>
   </div>
 </nav>

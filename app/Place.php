@@ -8,6 +8,17 @@ class Place extends Model
 {
 	protected $fillable = [
         'name',
-        'type'
+        'type_id',
+		'photo_id'
     ];
+
+	public function type()
+    {
+    	return $this->belongsTo('App\Type');
+    }
+
+	public function photos()
+    {
+    	return $this->hasMany('App\Place');
+    }
 }
