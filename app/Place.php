@@ -6,19 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Place extends Model
 {
-	protected $fillable = [
+    protected $fillable = [
         'name',
-        'type_id',
-		'photo_id'
+        'type_id'
     ];
 
-	public function type()
+    public function type()
     {
-    	return $this->belongsTo('App\Type');
+        return $this->belongsTo('App\Type');
     }
 
 	public function photos()
     {
-    	return $this->hasMany('App\Place');
+        return $this->hasMany('App\Photo');
     }
 }

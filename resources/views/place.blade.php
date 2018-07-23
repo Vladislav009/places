@@ -4,7 +4,9 @@
 <p>Название - {{$place->name}}</p>
 <p>Тип - {{$place->type->type}}</p>
 
-
-<p> <img src="{{ asset($place->photos->url)}}" alt=""> </p>
-
+@if(isset($photos))
+@foreach($place->photos as $photo)
+<p> <img src="{{ asset($photo->url)}}" alt=""> </p>
+@endforeach
+@endif
 @endsection
