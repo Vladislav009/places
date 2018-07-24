@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Place;
 
 class Type extends Model
 {
@@ -12,6 +13,6 @@ class Type extends Model
 
 	public function places()
     {
-    	return $this->hasMany('App\Place');
+    	return $this->hasMany(Place::class);
     }
 }

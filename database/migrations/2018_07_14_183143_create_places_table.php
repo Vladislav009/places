@@ -17,7 +17,6 @@ class CreatePlacesTable extends Migration
             $table->increments('id');
 			$table->string('name');
 			$table->integer('type_id');
-			$table->integer('photo_id')->default('0');
             $table->timestamps();
         });
     }

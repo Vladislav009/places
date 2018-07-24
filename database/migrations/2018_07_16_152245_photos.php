@@ -17,6 +17,7 @@ class Photos extends Migration
             $table->increments('id');
 			$table->string('url');
 			$table->integer('place_id');
+			$table->timestamps();
         });
     }
 

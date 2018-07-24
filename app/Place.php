@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Type;
+use App\Photo;
 
 class Place extends Model
 {
@@ -13,11 +15,11 @@ class Place extends Model
 
     public function type()
     {
-        return $this->belongsTo('App\Type');
+        return $this->belongsTo(Type::class);
     }
 
 	public function photos()
     {
-        return $this->hasMany('App\Photo');
+        return $this->hasMany(Photo::class);
     }
 }

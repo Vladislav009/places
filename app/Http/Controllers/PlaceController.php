@@ -34,8 +34,7 @@ class PlaceController extends Controller
     public function show($id)
     {
         $place = Place::find($id);
-        $photos = $place->photos();
-        return view('place', compact('place','photos'));
+        return view('place', compact('place'));
     }
 
     public function showForm($id)
@@ -49,11 +48,11 @@ class PlaceController extends Controller
         $id = $request->type;
         $value = $request->image->storeAs($id, $path, 'public');
         $url = Storage::url($value);
-        Photo::insert(array(
-            'url' => $url,
+		Photo::create([
+			'url' => $url,
 			'place_id'=>$id
-        ));
-        return redirect('places/'.$id);
+		]);
+		return redirect()->route('place.show', ['id' => $id]);
     }
 
 	public function addFormSelect(Request $request)
@@ -67,10 +66,10 @@ class PlaceController extends Controller
         $path = $request->image->getClientOriginalName();
         $value = $request->image->storeAs($id, $path, 'public');
         $url = Storage::url($value);
-        Photo::insert(array(
-            'url' => $url,
+        Photo::create([
+			'url' => $url,
 			'place_id'=>$id
-        ));
-        return redirect('places/'.$id);
+		]);
+        return redirect()->route('place.show', ['id' => $id]);
     }
 }

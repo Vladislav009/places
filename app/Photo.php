@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Place;
 
 class Photo extends Model
 {
@@ -13,6 +14,6 @@ class Photo extends Model
 
 	public function place()
     {
-        return $this->belongsTo('App\Place');
+        return $this->belongsTo(Place::class);
     }
 }
