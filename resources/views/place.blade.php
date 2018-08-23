@@ -13,6 +13,10 @@
 <span class="assessment">{{$like->like}}</span>
 @endforeach
 
+@foreach($photo->assessments as $like)
+<span class="assessment">{{$like->dislike}}</span>
+@endforeach
+
 
 <a href="{{route ('assessment.dislike_photo',$photo->id)}}"><i class="fas fa-thumbs-down"></i></a>
 
