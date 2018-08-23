@@ -14,6 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('like/{id}', 'AssessmentController@likePlace')->name('assessment.like');
+Route::get('dislike/{id}', 'AssessmentController@dislikePlace')->name('assessment.dislike');
+Route::get('like_photo/{id}', 'AssessmentController@likePhoto')->name('assessment.like_photo');
+Route::get('dislike_photo/{id}', 'AssessmentController@dislikePhoto')->name('assessment.dislike_photo');
+
 Route::prefix('places')->group(function(){
 
 	Route::get('/', 'PlaceController@index')->name('index');

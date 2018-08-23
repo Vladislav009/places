@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Type;
 use App\Photo;
+use App\Assessment;
 
 class Place extends Model
 {
@@ -21,5 +22,10 @@ class Place extends Model
 	public function photos()
     {
         return $this->hasMany(Photo::class);
+    }
+
+	public function assessments()
+    {
+        return $this->morphMany(Assessment::class, 'assessmentable');
     }
 }

@@ -10,6 +10,7 @@ use App\Http\Requests\PhotoRequest;
 use App\Place;
 use App\Type;
 use App\Photo;
+use App\Assessment;
 
 class PlaceController extends Controller
 {
@@ -27,8 +28,9 @@ class PlaceController extends Controller
 
     public function create(PlaceRequest $request)
     {
-        Place::create($request->all());
-        return redirect('places');
+        $places = Place::create($request->all());
+		$places->assessments()->save(new Assessment(['like'=>'0','dislike'=>'0']));
+        return redirect()->route('index');
     }
 
     public function show($id)
@@ -70,6 +72,13 @@ class PlaceController extends Controller
 			'url' => $url,
 			'place_id'=>$id
 		]);
+		$place = Place::find($id);
+
+		foreach($place->photos as $photo){
+			$item = Photo::find($photo->id);
+			$item->assessments()->save(new Assessment(['like'=>'0','dislike'=>'0']));
+		}
+
         return redirect()->route('place.show', ['id' => $id]);
     }
 }

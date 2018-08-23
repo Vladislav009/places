@@ -24,7 +24,7 @@ class PlaceRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' =>'regex:/[a-zA-ZА-Яа-я]/|unique:places,name'
+            'name' =>'required|regex:/[a-zA-ZА-Яа-я]/|unique:places,name'
         ];
     }
 }

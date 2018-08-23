@@ -2,7 +2,7 @@
 
 @section('content')
 
-<form  action="{{ route('place.create') }}" method="post">
+<form  action="{{route('place.create')}}" method="post">
 	<div class="form-group">
 		{{ csrf_field() }}
 		<label for="text_place">Введите название места:</label>
@@ -15,8 +15,7 @@
 	    	@endforeach
         </select>
     </div>
-	 <button type="submit" class="btn btn-primary mb-2">Добаить</button>
-
+	 <button type="submit" class="btn btn-primary mb-2">Добавить</button>
 </form>
 @if (count($errors) > 0)
   <div class="alert alert-danger">

@@ -1,0 +1,17 @@
+p {
+	color: black;
+}
+
+.container {
+	text-align: center;
+}
+
+span.assessment {
+ 	color: black;
+	font-family: Open sans-serif;
+	border: 1px solid black;
+}
+
+ul {
+	list-style: none;
+}
