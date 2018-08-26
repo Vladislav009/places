@@ -11,6 +11,7 @@ use App\Place;
 use App\Type;
 use App\Photo;
 use App\Assessment;
+use App\TypeAssessment;
 
 class PlaceController extends Controller
 {
@@ -29,7 +30,6 @@ class PlaceController extends Controller
     public function create(PlaceRequest $request)
     {
         $places = Place::create($request->all());
-		$places->assessments()->save(new Assessment(['like'=>'0','dislike'=>'0']));
         return redirect()->route('index');
     }
 
@@ -39,46 +39,17 @@ class PlaceController extends Controller
         return view('place', compact('place'));
     }
 
-    public function showForm($id)
-    {
-        return view('formPhoto', compact('id'));
-    }
-
-	public function storeSelect(PhotoRequest $request)
-    {
-		$path = $request->image->getClientOriginalName();
-        $id = $request->type;
-        $value = $request->image->storeAs($id, $path, 'public');
-        $url = Storage::url($value);
-		Photo::create([
-			'url' => $url,
-			'place_id'=>$id
-		]);
-		return redirect()->route('place.show', ['id' => $id]);
-    }
-
-	public function addFormSelect(Request $request)
-    {
-		$places = Place::all();
-        return view('formPhotoSelect', compact('places'));
-    }
-
-    public function store(PhotoRequest $request, $id)
-    {
-        $path = $request->image->getClientOriginalName();
-        $value = $request->image->storeAs($id, $path, 'public');
-        $url = Storage::url($value);
-        Photo::create([
-			'url' => $url,
-			'place_id'=>$id
-		]);
+	public function likePlace($id)
+	{
 		$place = Place::find($id);
+		$place->assessments()->save(new Assessment(['type_assessment_id' => 1]));
+		return redirect()->route('index');
+	}
 
-		foreach($place->photos as $photo){
-			$item = Photo::find($photo->id);
-			$item->assessments()->save(new Assessment(['like'=>'0','dislike'=>'0']));
-		}
-
-        return redirect()->route('place.show', ['id' => $id]);
-    }
+	public function dislikePlace($id)
+	{
+		$place = Place::find($id);
+		$place->assessments()->save(new Assessment(['type_assessment_id' => 2]));
+		return redirect()->route('index');
+	}
 }

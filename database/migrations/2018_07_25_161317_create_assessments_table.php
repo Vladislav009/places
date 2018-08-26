@@ -15,8 +15,7 @@ class CreateAssessmentsTable extends Migration
     {
         Schema::create('assessments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('like')->default('0');
-			$table->integer('dislike')->default('0');
+			$table->integer('type_assessment_id');
 			$table->integer('assessmentable_id');
 			$table->string('assessmentable_type');
             $table->timestamps();

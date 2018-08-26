@@ -15,10 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('like/{id}', 'AssessmentController@likePlace')->name('assessment.like');
-Route::get('dislike/{id}', 'AssessmentController@dislikePlace')->name('assessment.dislike');
-Route::get('like_photo/{id}', 'AssessmentController@likePhoto')->name('assessment.like_photo');
-Route::get('dislike_photo/{id}', 'AssessmentController@dislikePhoto')->name('assessment.dislike_photo');
+Route::get('rating', 'AssessmentController@rating')->name('assessment.rating');
 
 Route::prefix('places')->group(function(){
 
@@ -32,11 +29,18 @@ Route::prefix('places')->group(function(){
 
 	Route::name('photo.')->group(function(){
 		Route::prefix('photos')->group(function(){
-			Route::get('add', 'PlaceController@addFormSelect')->name('form.select')->middleware('check');
-			Route::post('add', 'PlaceController@storeSelect')->name('store.select');
+			Route::get('add', 'PhotoController@addFormSelect')->name('form.select')->middleware('check');
+			Route::post('add', 'PhotoController@storeSelect')->name('store.select');
 		});
-		Route::get('{id}/photos/add', 'PlaceController@showForm')->name('form');
-		Route::post('{id}/photos/add', 'PlaceController@store')->name('store');
+		Route::get('{id}/photos/add', 'PhotoController@showForm')->name('form');
+		Route::post('{id}/photos/add', 'PhotoController@store')->name('store');
+	});
+
+	Route::name('assessment.')->group(function(){
+		Route::get('like/{id}', 'PlaceController@likePlace')->name('like');
+		Route::get('dislike/{id}', 'PlaceController@dislikePlace')->name('dislike');
+		Route::get('like_photo/{id}', 'PhotoController@likePhoto')->name('like_photo');
+		Route::get('dislike_photo/{id}', 'PhotoController@dislikePhoto')->name('dislike_photo');
 	});
 
 });

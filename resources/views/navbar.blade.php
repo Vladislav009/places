@@ -11,6 +11,9 @@
 	  <li class="nav-item">
 	   <a class="nav-link  @if (Route::currentRouteName() == 'index') active @endif" href="{{route ('index')}}">Все места</a>
 	 </li>
+	 <li class="nav-item">
+	  <a class="nav-link  @if (Route::currentRouteName() == 'assessment.rating') active @endif" href="{{route ('assessment.rating')}}">Рейтинг мест</a>
+	</li>
 	  @if (Route::currentRouteName() == 'place.show')
 	  <li class="nav-item">
 		<a class="nav-link  @if(Route::currentRouteName() == 'photo.form') active @endif" href="{{route('photo.form',  $place->id) }}">Добавить фотографию</a>

@@ -4,11 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Assessment extends Model
 {
 	protected $fillable = [
-        'like',
-        'dislike',
+        'assessment',
+		'type_assessment_id',
 		'assessmentable_id',
 		'assessmentable_type'
     ];
@@ -17,4 +18,6 @@ class Assessment extends Model
   {
     return $this->morphTo();
   }
+
+
 }

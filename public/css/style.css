@@ -15,3 +15,7 @@ span.assessment {
 ul {
 	list-style: none;
 }
+
+.row {
+	border: none;
+}
