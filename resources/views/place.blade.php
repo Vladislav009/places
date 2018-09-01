@@ -3,7 +3,7 @@
 @section('content')
 <p>Название - {{$place->name}}</p>
 <p>Тип - {{$place->type->type}}</p>
-<p>Общая оценка места:</p>
+<p>Общая оценка места:{{$ratingPlace}}</p>
 
 @foreach($place->photos as $photo)
 

@@ -55,7 +55,7 @@ class PhotoController extends Controller
 	public function likePhoto($id)
 	{
 		$photo = Photo::find($id);
-		$photo->assessments()->save(new Assessment(['type_assessment_id' => 1]));
+		$photo->assessments()->create(['type_assessment_id' => 1]);
 		$place_id = $photo->place_id;
 		return redirect()->route('place.show',['id' => $place_id]);
 	}
@@ -63,7 +63,7 @@ class PhotoController extends Controller
 	public function dislikePhoto($id)
 	{
 		$photo = Photo::find($id);
-		$photo->assessments()->save(new Assessment(['type_assessment_id' => 2]));
+		$photo->assessments()->create(['type_assessment_id' => 2]);
 		$place_id = $photo->place_id;
 		return redirect()->route('place.show',['id' => $place_id]);
 	}

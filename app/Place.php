@@ -28,4 +28,11 @@ class Place extends Model
     {
         return $this->morphMany(Assessment::class, 'assessmentable');
     }
+
+	public function scopeRating($query)
+	{
+		return $query->where('type_assessment_id',1)->count();
+	}
+
+
 }

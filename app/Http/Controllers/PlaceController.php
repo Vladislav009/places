@@ -36,20 +36,34 @@ class PlaceController extends Controller
     public function show($id)
     {
         $place = Place::find($id);
-        return view('place', compact('place'));
+		$likePlace = Place::find($id)->assessments()->rating();
+		$photos = $place->photos;
+		foreach ($photos as $key =>$value) {
+			$data[$key] =  $value->assessments()->rating();
+		}
+		$likePhoto = collect($data)->sum();
+		$ratingPlace = $likePhoto + $likePlace;
+
+        return view('place', compact('place', 'ratingPlace'));
     }
 
 	public function likePlace($id)
 	{
 		$place = Place::find($id);
-		$place->assessments()->save(new Assessment(['type_assessment_id' => 1]));
+		$place->assessments()->create(['type_assessment_id' => 1]);
 		return redirect()->route('index');
+	}
+
+	public function countLike($id)
+	{
+		$place = Place::find($id);
+		$count = $place->assessments->where('type_assessment_id', 1)->count();
 	}
 
 	public function dislikePlace($id)
 	{
 		$place = Place::find($id);
-		$place->assessments()->save(new Assessment(['type_assessment_id' => 2]));
+		$place->assessments()->create(['type_assessment_id' => 2]);
 		return redirect()->route('index');
 	}
 }

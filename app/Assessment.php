@@ -19,5 +19,9 @@ class Assessment extends Model
     return $this->morphTo();
   }
 
+  public function scopeRating($query)
+  {
+ 	 return $query->where('type_assessment_id',1)->count();
+  }
 
 }
