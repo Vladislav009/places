@@ -36,10 +36,11 @@ class PlaceController extends Controller
     public function show($id)
     {
         $place = Place::find($id);
-		$likePlace = Place::find($id)->assessments()->rating();
+		$likePlace = Place::find($id)->assessments()->likes();
+		$disPlace = Place::find($id)->assessments()->dis();
 		$photos = $place->photos;
 		foreach ($photos as $key =>$value) {
-			$data[$key] =  $value->assessments()->rating();
+			$data[$key] =  $value->assessments()->likes();
 		}
 		$likePhoto = collect($data)->sum();
 		$ratingPlace = $likePhoto + $likePlace;
@@ -52,12 +53,6 @@ class PlaceController extends Controller
 		$place = Place::find($id);
 		$place->assessments()->create(['type_assessment_id' => 1]);
 		return redirect()->route('index');
-	}
-
-	public function countLike($id)
-	{
-		$place = Place::find($id);
-		$count = $place->assessments->where('type_assessment_id', 1)->count();
 	}
 
 	public function dislikePlace($id)

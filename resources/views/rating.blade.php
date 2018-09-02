@@ -9,9 +9,9 @@
     	@foreach($places as $place)
     	<tr>
     		<td><a href="{{route ('place.show',$place->id)}}">{{$place->name}}</a></td>
-			@foreach($place->assessments as $assessment)
-			<td>{{$assessment->sum('like')}}</td>
-			@endforeach
+
+			<td>{{$ratingPhoto}}</td>
+
     	</tr>
     	@endforeach
     	@endif

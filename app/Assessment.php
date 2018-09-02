@@ -19,9 +19,14 @@ class Assessment extends Model
     return $this->morphTo();
   }
 
-  public function scopeRating($query)
+  public function scopeLikes($query)
   {
  	 return $query->where('type_assessment_id',1)->count();
+  }
+
+  public function scopeDis($query)
+  {
+	  return $query->where('type_assessment_id',2)->count();
   }
 
 }
